@@ -1,2 +1,2 @@
 # alisaklumakova.github.io
-My PRIVAT CASINO BLOG
+Private CASINO blog
