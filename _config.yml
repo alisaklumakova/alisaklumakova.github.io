@@ -9,3 +9,7 @@ url: "http://alisaklumakova.github.io" # the base hostname & protocol for your s
 # Build settings
 markdown: kramdown
 permalink: pretty
+
+
+plugins:
+    - jekyll-minifier
