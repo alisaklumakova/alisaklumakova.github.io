@@ -13,3 +13,4 @@ permalink: pretty
 
 plugins:
     - jekyll-minifier
+    - jekyll-sitemap
