@@ -1,19 +1,7 @@
-/*!
-
-Holder - client side image placeholders
-Version 2.9.4+cabil
-© 2016 Ivan Malopinsky - http://imsky.co
-
-Site:     http://holderjs.com
-Issues:   https://github.com/imsky/holder/issues
-License:  MIT
-
-*/
 (function (window) {
   if (!window.document) return;
   var document = window.document;
 
-  //https://github.com/inexorabletash/polyfill/blob/master/web.js
     if (!document.querySelectorAll) {
       document.querySelectorAll = function (selectors) {
         var style = document.createElement('style'), elements = [], element;
@@ -48,9 +36,6 @@ License:  MIT
       };
     }
 
-  //https://github.com/inexorabletash/polyfill
-  // ES5 15.2.3.14 Object.keys ( O )
-  // https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object/keys
   if (!Object.keys) {
     Object.keys = function (o) {
       if (o !== Object(o)) { throw TypeError('Object.keys called on non-object'); }
@@ -64,8 +49,6 @@ License:  MIT
     };
   }
 
-  // ES5 15.4.4.18 Array.prototype.forEach ( callbackfn [ , thisArg ] )
-  // From https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/forEach
   if (!Array.prototype.forEach) {
     Array.prototype.forEach = function (fun /*, thisp */) {
       if (this === void 0 || this === null) { throw TypeError(); }
@@ -83,7 +66,6 @@ License:  MIT
     };
   }
 
-  //https://github.com/inexorabletash/polyfill/blob/master/web.js
   (function (global) {
     var B64_ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
     global.atob = global.atob || function (input) {
@@ -138,7 +120,6 @@ License:  MIT
         o2 = input.charCodeAt(position++);
         o3 = input.charCodeAt(position++);
 
-        // 111111 112222 222233 333333
         e1 = o1 >> 2;
         e2 = ((o1 & 0x3) << 4) | (o2 >> 4);
         e3 = ((o2 & 0xf) << 2) | (o3 >> 6);
@@ -161,26 +142,14 @@ License:  MIT
     };
   }(window));
 
-  //https://gist.github.com/jimeh/332357
   if (!Object.prototype.hasOwnProperty){
-      /*jshint -W001, -W103 */
+    
       Object.prototype.hasOwnProperty = function(prop) {
       var proto = this.__proto__ || this.constructor.prototype;
       return (prop in this) && (!(prop in proto) || proto[prop] !== this[prop]);
     };
-      /*jshint +W001, +W103 */
+
   }
-
-  // @license http://opensource.org/licenses/MIT
-  // copyright Paul Irish 2015
-
-
-  // Date.now() is supported everywhere except IE8. For IE8 we use the Date.now polyfill
-  //   github.com/Financial-Times/polyfill-service/blob/master/polyfills/Date.now/polyfill.js
-  // as Safari 6 doesn't have support for NavigationTiming, we use a Date.now() timestamp for relative values
-
-  // if you want values similar to what you'd get with real perf.now, place this towards the head of the page
-  // but in reality, you're just getting the delta between now() calls, so it's not terribly important where it's placed
 
 
   (function(){
@@ -189,7 +158,7 @@ License:  MIT
         window.performance = {};
     }
     
-    Date.now = (Date.now || function () {  // thanks IE8
+    Date.now = (Date.now || function () {  
       return new Date().getTime();
     });
 
@@ -208,11 +177,9 @@ License:  MIT
 
   })();
 
-  //requestAnimationFrame polyfill for older Firefox/Chrome versions
   if (!window.requestAnimationFrame) {
     if (window.webkitRequestAnimationFrame && window.webkitCancelAnimationFrame) {
-    //https://github.com/Financial-Times/polyfill-service/blob/master/polyfills/requestAnimationFrame/polyfill-webkit.js
-    (function (global) {
+   (function (global) {
       global.requestAnimationFrame = function (callback) {
         return webkitRequestAnimationFrame(function () {
           callback(global.performance.now());
@@ -222,7 +189,6 @@ License:  MIT
       global.cancelAnimationFrame = global.webkitCancelAnimationFrame;
     }(window));
     } else if (window.mozRequestAnimationFrame && window.mozCancelAnimationFrame) {
-      //https://github.com/Financial-Times/polyfill-service/blob/master/polyfills/requestAnimationFrame/polyfill-moz.js
     (function (global) {
       global.requestAnimationFrame = function (callback) {
         return mozRequestAnimationFrame(function () {
@@ -254,70 +220,51 @@ License:  MIT
 	else
 		root["Holder"] = factory();
 })(this, function() {
-return /******/ (function(modules) { // webpackBootstrap
-/******/ 	// The module cache
-/******/ 	var installedModules = {};
+return  (function(modules) { 
 
-/******/ 	// The require function
-/******/ 	function __webpack_require__(moduleId) {
+var installedModules = {};
 
-/******/ 		// Check if module is in cache
-/******/ 		if(installedModules[moduleId])
-/******/ 			return installedModules[moduleId].exports;
+	function __webpack_require__(moduleId) {
 
-/******/ 		// Create a new module (and put it into the cache)
-/******/ 		var module = installedModules[moduleId] = {
-/******/ 			exports: {},
-/******/ 			id: moduleId,
-/******/ 			loaded: false
-/******/ 		};
+		if(installedModules[moduleId])
+return installedModules[moduleId].exports;
 
-/******/ 		// Execute the module function
-/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+		var module = installedModules[moduleId] = {
+    	exports: {},
+    	id: moduleId,
+		loaded: false
+ 		};
 
-/******/ 		// Flag the module as loaded
-/******/ 		module.loaded = true;
+	modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
 
-/******/ 		// Return the exports of the module
-/******/ 		return module.exports;
-/******/ 	}
+	module.loaded = true;
+
+		return module.exports;
+	}
 
 
-/******/ 	// expose the modules object (__webpack_modules__)
-/******/ 	__webpack_require__.m = modules;
+	__webpack_require__.m = modules;
 
-/******/ 	// expose the module cache
-/******/ 	__webpack_require__.c = installedModules;
+	__webpack_require__.c = installedModules;
 
-/******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "";
+	__webpack_require__.p = "";
 
-/******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(0);
-/******/ })
-/************************************************************************/
-/******/ ([
-/* 0 */
-/***/ function(module, exports, __webpack_require__) {
+	return __webpack_require__(0);
+})
+([
 
-	/*
-	Holder.js - client side image placeholders
-	(c) 2012-2015 Ivan Malopinsky - http://imsky.co
-	*/
+function(module, exports, __webpack_require__) {
+
+
 
 	module.exports = __webpack_require__(1);
 
 
-/***/ },
-/* 1 */
-/***/ function(module, exports, __webpack_require__) {
+},
 
-	/* WEBPACK VAR INJECTION */(function(global) {/*
-	Holder.js - client side image placeholders
-	(c) 2012-2016 Ivan Malopinsky - http://imsky.co
-	*/
+ function(module, exports, __webpack_require__) {
 
-	//Libraries and functions
+(function(global) {
 	var onDomReady = __webpack_require__(2);
 	var querystring = __webpack_require__(3);
 
@@ -334,32 +281,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	var extend = utils.extend;
 	var dimensionCheck = utils.dimensionCheck;
 
-	//Constants and definitions
+
 	var SVG_NS = constants.svg_ns;
 
 	var Holder = {
 	    version: constants.version,
 
-	    /**
-	     * Adds a theme to default settings
-	     *
-	     * @param {string} name Theme name
-	     * @param {Object} theme Theme object, with foreground, background, size, font, and fontweight properties.
-	     */
+	   
 	    addTheme: function(name, theme) {
 	        name != null && theme != null && (App.settings.themes[name] = theme);
 	        delete App.vars.cache.themeKeys;
 	        return this;
 	    },
 
-	    /**
-	     * Appends a placeholder to an element
-	     *
-	     * @param {string} src Placeholder URL string
-	     * @param el A selector or a reference to a DOM node
-	     */
+
 	    addImage: function(src, el) {
-	        //todo: use jquery fallback if available for all QSA references
 	        var nodes = DOM.getNodeArray(el);
 	        nodes.forEach(function (node) {
 	            var img = DOM.newEl('img');
@@ -370,14 +306,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	        });
 	        return this;
 	    },
-
-	    /**
-	     * Sets whether or not an image is updated on resize.
-	     * If an image is set to be updated, it is immediately rendered.
-	     *
-	     * @param {Object} el Image DOM element
-	     * @param {Boolean} value Resizable update flag value
-	     */
 	    setResizeUpdate: function(el, value) {
 	        if (el.holderData) {
 	            el.holderData.resizeUpdate = !!value;
@@ -386,14 +314,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            }
 	        }
 	    },
-
-	    /**
-	     * Runs Holder with options. By default runs Holder on all images with "holder.js" in their source attributes.
-	     *
-	     * @param {Object} userOptions Options object, can contain domain, themes, images, and bgnodes properties
-	     */
 	    run: function(userOptions) {
-	        //todo: split processing into separate queues
 	        userOptions = userOptions || {};
 	        var engineSettings = {};
 	        var options = extend(App.settings, userOptions);
@@ -419,7 +340,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        stylenodes.forEach(function (styleNode) {
 	            if (styleNode.attributes.rel && styleNode.attributes.href && styleNode.attributes.rel.value == 'stylesheet') {
 	                var href = styleNode.attributes.href.value;
-	                //todo: write isomorphic relative-to-absolute URL function
+
 	                var proxyLink = DOM.newEl('a');
 	                proxyLink.href = href;
 	                var stylesheetURL = proxyLink.protocol + '//' + proxyLink.host + proxyLink.pathname + proxyLink.search;
@@ -428,7 +349,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	        });
 
 	        bgnodes.forEach(function (bgNode) {
-	            //Skip processing background nodes if getComputedStyle is unavailable, since only modern browsers would be able to use canvas or SVG to render to background
 	            if (!global.getComputedStyle) return;
 	            var backgroundImage = global.getComputedStyle(bgNode, null).getPropertyValue('background-image');
 	            var dataBackgroundImage = bgNode.getAttribute('data-background-src');
@@ -499,13 +419,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	                if (imageAttr.src.indexOf(options.domain) === 0) {
 	                    prepareImageElement(options, engineSettings, imageAttr.src, image);
 	                } else if (imageHasDataSrcURL) {
-	                    //Image has a valid data-src and an invalid src
+
 	                    if (imageRendered) {
-	                        //If the placeholder has already been render, re-render it
+
 	                        prepareImageElement(options, engineSettings, imageAttr.dataSrc, image);
 	                    } else {
-	                        //If the placeholder has not been rendered, check if the image exists and render a fallback if it doesn't
-	                        (function(src, options, engineSettings, dataSrc, image) {
+	                        
+                          (function(src, options, engineSettings, dataSrc, image) {
 	                            utils.imageExists(src, function(exists) {
 	                                if (!exists) {
 	                                    prepareImageElement(options, engineSettings, dataSrc, image);
@@ -564,15 +484,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	};
 
-	/**
-	 * Processes provided source attribute and sets up the appropriate rendering workflow
-	 *
-	 * @private
-	 * @param options Instance options from Holder.run
-	 * @param renderSettings Instance configuration
-	 * @param src Image URL
-	 * @param el Image DOM element
-	 */
+
 	function prepareImageElement(options, engineSettings, src, el) {
 	    var holderFlags = parseURL(src.substr(src.lastIndexOf(options.domain)), options);
 	    if (holderFlags) {
@@ -585,13 +497,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	}
 
-	/**
-	 * Processes a Holder URL and extracts configuration from query string
-	 *
-	 * @private
-	 * @param url URL
-	 * @param instanceOptions Instance options from Holder.run
-	 */
+
 	function parseURL(url, instanceOptions) {
 	    var holder = {
 	        theme: extend(App.settings.themes.gray, null),
@@ -625,7 +531,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if (parts.length === 2) {
 	        var options = querystring.parse(parts[1]);
 
-	        // Dimensions
+	       
 
 	        if (utils.truthy(options.ratio)) {
 	            holder.fluid = true;
@@ -641,7 +547,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	        holder.auto = utils.truthy(options.auto);
 
-	        // Colors
+	      
 
 	        if (options.bg) {
 	            holder.theme.bg = utils.parseColor(options.bg);
@@ -651,7 +557,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	            holder.theme.fg = utils.parseColor(options.fg);
 	        }
 
-	        //todo: add automatic foreground to themes without foreground
 	        if (options.bg && !options.fg) {
 	            holder.autoFg = true;
 	        }
@@ -660,8 +565,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            holder.theme = extend(holder.instanceOptions.themes[options.theme], null);
 	        }
 
-	        // Text
-
+	        
 	        if (options.text) {
 	            holder.text = options.text;
 	        }
@@ -688,8 +592,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	        holder.nowrap = utils.truthy(options.nowrap);
 
-	        // Miscellaneous
-
+	     
 	        holder.outline = utils.truthy(options.outline);
 
 	        if (utils.truthy(options.random)) {
@@ -702,12 +605,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return holder;
 	}
 
-	/**
-	 * Modifies the DOM to fit placeholders and sets up resizable image callbacks (for fluid and automatically sized placeholders)
-	 *
-	 * @private
-	 * @param settings DOM prep settings
-	 */
+
 	function prepareDOMElement(prepSettings) {
 	    var mode = prepSettings.mode;
 	    var el = prepSettings.el;
@@ -723,7 +621,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if (flags.text != null) {
 	        theme.text = flags.text;
 
-	        //<object> SVG embedding doesn't parse Unicode properly
 	        if (el.nodeName.toLowerCase() === 'object') {
 	            var textLines = theme.text.split('\\n');
 	            for (var k = 0; k < textLines.length; k++) {
@@ -737,7 +634,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var holderTemplateMatches = theme.text.match(holderTemplateRe);
 
 	        if (holderTemplateMatches !== null) {
-	            //todo: optimize template replacement
+
 	            holderTemplateMatches.forEach(function (match) {
 	                if (match === 'holder_dimensions') {
 	                    theme.text = theme.text.replace(match, dimensionsCaption);
@@ -750,12 +647,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var engineSettings = extend(_engineSettings, null);
 
 	    if (flags.font) {
-	        /*
-	        If external fonts are used in a <img> placeholder rendered with SVG, Holder falls back to canvas.
-
-	        This is done because Firefox and Chrome disallow embedded SVGs from referencing external assets.
-	        The workaround is either to change the placeholder tag from <img> to <object> or to use the canvas renderer.
-	        */
 	        theme.font = flags.font;
 	        if (!engineSettings.noFontFallback && el.nodeName.toLowerCase() === 'img' && App.setup.supportsCanvas && engineSettings.renderer === 'svg') {
 	            engineSettings = extend(engineSettings, {
@@ -764,7 +655,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	    }
 
-	    //Chrome and Opera require a quick 10ms re-render if web fonts are used with canvas
 	    if (flags.font && engineSettings.renderer == 'canvas') {
 	        engineSettings.reRender = true;
 	    }
@@ -783,7 +673,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    flags.theme = theme;
 
-	    //todo consider using all renderSettings in holderData
 	    el.holderData = {
 	        flags: flags,
 	        engineSettings: engineSettings
@@ -853,12 +742,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	}
 
-	/**
-	 * Core function that takes output from renderers and sets it as the source or background-image of the target element
-	 *
-	 * @private
-	 * @param renderSettings Renderer settings
-	 */
 	function render(renderSettings) {
 	    var image = null;
 	    var mode = renderSettings.mode;
@@ -877,7 +760,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	            return;
 	    }
 
-	    //todo: move generation of scene up to flag generation to reduce extra object creation
 	    var scene = {
 	        width: holderSettings.dimensions.width,
 	        height: holderSettings.dimensions.height,
@@ -909,7 +791,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	        throw 'Holder: couldn\'t render placeholder';
 	    }
 
-	    //todo: add <object> canvas rendering
 	    if (mode == 'background') {
 	        el.style.backgroundImage = 'url(' + image + ')';
 
@@ -933,7 +814,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                if (image == null) {
 	                    throw 'Holder: couldn\'t render placeholder';
 	                }
-	                //todo: refactor this code into a function
+	         
 	                if (el.nodeName.toLowerCase() === 'img') {
 	                    DOM.setAttr(el, {
 	                        'src': image
@@ -947,20 +828,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	            }, 150);
 	        }
 	    }
-	    //todo: account for re-rendering
 	    DOM.setAttr(el, {
 	        'data-holder-rendered': true
 	    });
 	}
 
-	/**
-	 * Core function that takes a Holder scene description and builds a scene graph
-	 *
-	 * @private
-	 * @param scene Holder scene object
-	 */
-	//todo: make this function reusable
-	//todo: merge app defaults and setup properties into the scene argument
 	function buildSceneGraph(scene) {
 	    var fontSize = App.defaults.size;
 	    if (parseFloat(scene.theme.size)) {
@@ -1064,7 +936,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var lineKey;
 	        line = new Shape.Group('line' + lineIndex);
 
-	        //Double margin so that left/right-aligned next is not flush with edge of image
+	    
 	        if (scene.align === 'left' || scene.align === 'right') {
 	            maxLineWidth = scene.width * (1 - (1 - lineWrap) * 2);
 	        }
@@ -1133,20 +1005,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	        holderTextGroup.moveTo(null, (scene.height - tpdata.boundingBox.height) / 2, null);
 	    }
-
-	    //todo: renderlist
 	    return sceneGraph;
 	}
 
-	/**
-	 * Adaptive text sizing function
-	 *
-	 * @private
-	 * @param width Parent width
-	 * @param height Parent height
-	 * @param fontSize Requested text size
-	 * @param scale Proportional scale of text
-	 */
 	function textSize(width, height, fontSize, scale) {
 	    var stageWidth = parseInt(width, 10);
 	    var stageHeight = parseInt(height, 10);
@@ -1158,12 +1019,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return Math.round(Math.max(fontSize, newHeight));
 	}
 
-	/**
-	 * Iterates over resizable (fluid or auto) placeholders and renders them
-	 *
-	 * @private
-	 * @param element Optional element selector, specified only if a specific element needs to be re-rendered
-	 */
 	function updateResizableElements(element) {
 	    var images;
 	    if (element == null || element.nodeType == null) {
@@ -1217,12 +1072,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	}
 
-	/**
-	 * Sets up aspect ratio metadata for fluid placeholders, in order to preserve proportions when resizing
-	 *
-	 * @private
-	 * @param el Image DOM element
-	 */
 	function setInitialDimensions(el) {
 	    if (el.holderData) {
 	        var dimensions = dimensionCheck(el);
@@ -1251,11 +1100,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	}
 
-	/**
-	 * Iterates through all current invisible images, and if they're visible, renders them and removes them from further checks. Runs every animation frame.
-	 *
-	 * @private
-	 */
 	function visibilityCheck() {
 	    var renderableImages = [];
 	    var keys = Object.keys(App.vars.invisibleImages);
@@ -1274,18 +1118,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	            images: renderableImages
 	        });
 	    }
-
-	    // Done to prevent 100% CPU usage via aggressive calling of requestAnimationFrame
 	    setTimeout(function () {
 	        global.requestAnimationFrame(visibilityCheck);
 	    }, 10);
 	}
 
-	/**
-	 * Starts checking for invisible placeholders if not doing so yet. Does nothing otherwise.
-	 *
-	 * @private
-	 */
 	function startVisibilityCheck() {
 	    if (!App.vars.visibilityCheckStarted) {
 	        global.requestAnimationFrame(visibilityCheck);
@@ -1293,12 +1130,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	}
 
-	/**
-	 * Sets a unique ID for an image detected to be invisible and adds it to the map of invisible images checked by visibilityCheck
-	 *
-	 * @private
-	 * @param el Invisible DOM element
-	 */
 	function setInvisible(el) {
 	    if (!el.holderData.invisibleId) {
 	        App.vars.invisibleId += 1;
@@ -1307,7 +1138,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	}
 
-	//todo: see if possible to convert stagingRenderer to use HTML only
 	var stagingRenderer = (function() {
 	    var svg = null,
 	        stagingText = null,
@@ -1324,7 +1154,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            }
 
 	            svg = SVG.initSVG(svg, rootNode.properties.width, rootNode.properties.height);
-	            //Show staging element before staging
+	        
 	            svg.style.display = 'block';
 
 	            if (firstTimeSetup) {
@@ -1340,9 +1170,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                svg.style.position = 'absolute';
 	                svg.style.top = '-100%';
 	                svg.style.left = '-100%';
-	                //todo: workaround for zero-dimension <svg> tag in Opera 12
-	                //svg.setAttribute('width', 0);
-	                //svg.setAttribute('height', 0);
+	       
 	            }
 
 	            var holderTextGroup = rootNode.children.holderTextGroup;
@@ -1356,25 +1184,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	                })
 	            });
 
-	            //Get bounding box for the whole string (total width and height)
 	            stagingTextNode.nodeValue = htgProps.text;
 	            var stagingTextBBox = stagingText.getBBox();
 
-	            //Get line count and split the string into words
 	            var lineCount = Math.ceil(stagingTextBBox.width / rootNode.properties.width);
 	            var words = htgProps.text.split(' ');
 	            var newlines = htgProps.text.match(/\\n/g);
 	            lineCount += newlines == null ? 0 : newlines.length;
 
-	            //Get bounding box for the string with spaces removed
 	            stagingTextNode.nodeValue = htgProps.text.replace(/[ ]+/g, '');
 	            var computedNoSpaceLength = stagingText.getComputedTextLength();
 
-	            //Compute average space width
 	            var diffLength = stagingTextBBox.width - computedNoSpaceLength;
 	            var spaceWidth = Math.round(diffLength / Math.max(1, words.length - 1));
 
-	            //Get widths for every word with space only if there is more than one line
 	            var wordWidths = [];
 	            if (lineCount > 1) {
 	                stagingTextNode.nodeValue = '';
@@ -1389,7 +1212,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	                }
 	            }
 
-	            //Hide staging element after staging
 	            svg.style.display = 'none';
 
 	            return {
@@ -1399,19 +1221,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	                words: wordWidths
 	            };
 	        } else {
-	            //todo: canvas fallback for measuring text on android 2.3
 	            return false;
 	        }
 	    };
 	})();
 
-	//Helpers
-
-	/**
-	 * Prevents a function from being called too often, waits until a timer elapses to call it again
-	 *
-	 * @param fn Function to call
-	 */
 	function debounce(fn) {
 	    if (!App.vars.debounceTimer) fn.call(this);
 	    if (App.vars.debounceTimer) global.clearTimeout(App.vars.debounceTimer);
@@ -1421,16 +1235,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }, App.setup.debounce);
 	}
 
-	/**
-	 * Holder-specific resize/orientation change callback, debounced to prevent excessive execution
-	 */
+
 	function resizeEvent() {
 	    debounce(function() {
 	        updateResizableElements(null);
 	    });
 	}
 
-	//Set up flags
 
 	for (var flag in App.flags) {
 	    if (!App.flags.hasOwnProperty(flag)) continue;
@@ -1438,8 +1249,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	        return val.match(this.regex);
 	    };
 	}
-
-	//Properties set once on setup
 
 	App.setup = {
 	    renderer: 'html',
@@ -1452,8 +1261,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    renderers: ['html', 'canvas', 'svg']
 	};
 
-	//Properties modified during runtime
-
 	App.vars = {
 	    preempted: false,
 	    resizableImages: [],
@@ -1464,7 +1271,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    cache: {}
 	};
 
-	//Pre-flight
 
 	(function() {
 	    var canvas = DOM.newEl('canvas');
@@ -1482,7 +1288,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	})();
 
-	//Starts checking for invisible placeholders
 	startVisibilityCheck();
 
 	if (onDomReady) {
@@ -1507,21 +1312,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	module.exports = Holder;
 
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
+}.call(exports, (function() { return this; }())))
 
-/***/ },
-/* 2 */
-/***/ function(module, exports) {
+},
 
-	/*!
-	 * onDomReady.js 1.4.0 (c) 2013 Tubal Martin - MIT license
-	 *
-	 * Specially modified to work with Holder.js
-	 */
-
+ function(module, exports) {
 	function _onDomReady(win) {
-	    //Lazy loading fix for Firefox < 3.6
-	    //http://webreflection.blogspot.com/2009/11/195-chars-to-help-lazy-loading.html
 	    if (document.readyState == null && document.addEventListener) {
 	        document.addEventListener("DOMContentLoaded", function DOMContentLoaded() {
 	            document.removeEventListener("DOMContentLoaded", DOMContentLoaded, false);
@@ -1544,46 +1340,36 @@ return /******/ (function(modules) { // webpackBootstrap
 	        DOMCONTENTLOADED = "DOMContentLoaded",
 	        ONREADYSTATECHANGE = "onreadystatechange",
 	        REMOVEEVENTLISTENER = "removeEventListener",
-	    
-	        // W3C Event model
+
 	        w3c = ADDEVENTLISTENER in doc,
 	        _top = FALSE,
 	    
-	        // isReady: Is the DOM ready to be used? Set to true once it occurs.
 	        isReady = FALSE,
 	    
-	        // Callbacks pending execution until DOM is ready
 	        callbacks = [];
 	    
-	    // Handle when the DOM is ready
 	    function ready( fn ) {
 	        if ( !isReady ) {
 	    
-	            // Make sure body exists, at least, in case IE gets a little overzealous (ticket #5443).
 	            if ( !doc.body ) {
 	                return defer( ready );
 	            }
 	    
-	            // Remember that the DOM is ready
 	            isReady = true;
 	    
-	            // Execute all callbacks
 	            while ( fn = callbacks.shift() ) {
 	                defer( fn );
 	            }
 	        }
 	    }
 	    
-	    // The ready event handler
 	    function completed( event ) {
-	        // readyState === "complete" is good enough for us to call the dom ready in oldIE
 	        if ( w3c || event.type === LOAD || doc[READYSTATE] === COMPLETE ) {
 	            detach();
 	            ready();
 	        }
 	    }
 	    
-	    // Clean-up method for dom ready events
 	    function detach() {
 	        if ( w3c ) {
 	            doc[REMOVEEVENTLISTENER]( DOMCONTENTLOADED, completed, FALSE );
@@ -1594,39 +1380,23 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	    }
 	    
-	    // Defers a function, scheduling it to run after the current call stack has cleared.
 	    function defer( fn, wait ) {
-	        // Allow 0 to be passed
 	        setTimeout( fn, +wait >= 0 ? wait : 1 );
 	    }
 	    
-	    // Attach the listeners:
-	    
-	    // Catch cases where onDomReady is called after the browser event has already occurred.
-	    // we once tried to use readyState "interactive" here, but it caused issues like the one
-	    // discovered by ChrisS here: http://bugs.jquery.com/ticket/12282#comment:15
+
 	    if ( doc[READYSTATE] === COMPLETE ) {
-	        // Handle it asynchronously to allow scripts the opportunity to delay ready
 	        defer( ready );
 	    
-	    // Standards-based browsers support DOMContentLoaded
 	    } else if ( w3c ) {
-	        // Use the handy event callback
 	        doc[ADDEVENTLISTENER]( DOMCONTENTLOADED, completed, FALSE );
 	    
-	        // A fallback to window.onload, that will always work
 	        win[ADDEVENTLISTENER]( LOAD, completed, FALSE );
 	    
-	    // If IE event model is used
 	    } else {
-	        // Ensure firing before onload, maybe late but safe also for iframes
 	        doc[ATTACHEVENT]( ONREADYSTATECHANGE, completed );
 	    
-	        // A fallback to window.onload, that will always work
 	        win[ATTACHEVENT]( ONLOAD, completed );
-	    
-	        // If IE and not a frame
-	        // continually check to see if the document is ready
 	        try {
 	            _top = win.frameElement == null && docElem;
 	        } catch(e) {}
@@ -1635,17 +1405,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	            (function doScrollCheck() {
 	                if ( !isReady ) {
 	                    try {
-	                        // Use the trick by Diego Perini
-	                        // http://javascript.nwbox.com/IEContentLoaded/
 	                        _top.doScroll("left");
 	                    } catch(e) {
 	                        return defer( doScrollCheck, 50 );
 	                    }
 	    
-	                    // detach all dom ready events
 	                    detach();
-	    
-	                    // and execute any waiting functions
 	                    ready();
 	                }
 	            })();
@@ -1653,13 +1418,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	    
 	    function onDomReady( fn ) {
-	        // If DOM is ready, execute the function (async), otherwise wait
 	        isReady ? defer( fn ) : callbacks.push( fn );
 	    }
 	    
-	    // Add version
 	    onDomReady.version = "1.4.0";
-	    // Add method to check if DOM is ready
 	    onDomReady.isReady = function(){
 	        return isReady;
 	    };
@@ -1669,35 +1431,16 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	module.exports = typeof window !== "undefined" && _onDomReady(window);
 
-/***/ },
-/* 3 */
-/***/ function(module, exports, __webpack_require__) {
-
-	//Modified version of component/querystring
-	//Changes: updated dependencies, dot notation parsing, JSHint fixes
-	//Fork at https://github.com/imsky/querystring
-
-	/**
-	 * Module dependencies.
-	 */
-
-	var encode = encodeURIComponent;
+},
+function(module, exports, __webpack_require__) {
+var encode = encodeURIComponent;
 	var decode = decodeURIComponent;
 	var trim = __webpack_require__(4);
 	var type = __webpack_require__(5);
 
 	var arrayRegex = /(\w+)\[(\d+)\]/;
 	var objectRegex = /\w+\.\w+/;
-
-	/**
-	 * Parse the given query `str`.
-	 *
-	 * @param {String} str
-	 * @return {Object}
-	 * @api public
-	 */
-
-	exports.parse = function(str){
+exports.parse = function(str){
 	  if ('string' !== typeof str) return {};
 
 	  str = trim(str);
@@ -1748,15 +1491,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return obj;
 	};
 
-	/**
-	 * Stringify the given `obj`.
-	 *
-	 * @param {Object} obj
-	 * @return {String}
-	 * @api public
-	 */
-
-	exports.stringify = function(obj){
+exports.stringify = function(obj){
 	  if (!obj) return '';
 	  var pairs = [];
 
@@ -1777,9 +1512,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 
-/***/ },
-/* 4 */
-/***/ function(module, exports) {
+},
+function(module, exports) {
 
 	
 	exports = module.exports = trim;
@@ -1797,25 +1531,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 
-/***/ },
-/* 5 */
-/***/ function(module, exports) {
-
-	/**
-	 * toString ref.
-	 */
-
-	var toString = Object.prototype.toString;
-
-	/**
-	 * Return the type of `val`.
-	 *
-	 * @param {Mixed} val
-	 * @return {String}
-	 * @api public
-	 */
-
-	module.exports = function(val){
+},
+function(module, exports) {
+var toString = Object.prototype.toString;
+module.exports = function(val){
 	  switch (toString.call(val)) {
 	    case '[object Date]': return 'date';
 	    case '[object RegExp]': return 'regexp';
@@ -1838,10 +1557,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return typeof val;
 	};
 
-	// code borrowed from https://github.com/feross/is-buffer/blob/master/index.js
-	function isBuffer(obj) {
+function isBuffer(obj) {
 	  return !!(obj != null &&
-	    (obj._isBuffer || // For Safari 5-7 (missing Object.prototype.constructor)
+	    (obj._isBuffer || 
 	      (obj.constructor &&
 	      typeof obj.constructor.isBuffer === 'function' &&
 	      obj.constructor.isBuffer(obj))
@@ -1849,15 +1567,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 
-/***/ },
-/* 6 */
-/***/ function(module, exports) {
+},
+function(module, exports) {
 
 	var SceneGraph = function(sceneProperties) {
 	    var nodeCount = 1;
-
-	    //todo: move merge to helpers section
-	    function merge(parent, child) {
+ function merge(parent, child) {
 	        for (var prop in child) {
 	            parent[prop] = child[prop];
 	        }
@@ -1960,18 +1675,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = SceneGraph;
 
 
-/***/ },
-/* 7 */
-/***/ function(module, exports) {
-
-	/* WEBPACK VAR INJECTION */(function(global) {/**
-	 * Shallow object clone and merge
-	 *
-	 * @param a Object A
-	 * @param b Object B
-	 * @returns {Object} New object with all of A's properties, and all of B's properties, overwriting A's properties
-	 */
-	exports.extend = function(a, b) {
+},
+function(module, exports) {
+(function(global) {
+  exports.extend = function(a, b) {
 	    var c = {};
 	    for (var x in a) {
 	        if (a.hasOwnProperty(x)) {
@@ -1988,12 +1695,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return c;
 	};
 
-	/**
-	 * Takes a k/v list of CSS properties and returns a rule
-	 *
-	 * @param props CSS properties object
-	 */
-	exports.cssProps = function(props) {
+exports.cssProps = function(props) {
 	    var ret = [];
 	    for (var p in props) {
 	        if (props.hasOwnProperty(p)) {
@@ -2002,13 +1704,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	    return ret.join(';');
 	};
-
-	/**
-	 * Encodes HTML entities in a string
-	 *
-	 * @param str Input string
-	 */
-	exports.encodeHtmlEntity = function(str) {
+exports.encodeHtmlEntity = function(str) {
 	    var buf = [];
 	    var charCode = 0;
 	    for (var i = str.length - 1; i >= 0; i--) {
@@ -2022,13 +1718,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return buf.join('');
 	};
 
-	/**
-	 * Checks if an image exists
-	 *
-	 * @param src URL of image
-	 * @param callback Callback to call once image status has been found
-	 */
-	exports.imageExists = function(src, callback) {
+exports.imageExists = function(src, callback) {
 	    var image = new Image();
 	    image.onerror = function() {
 	        callback.call(this, false);
@@ -2038,25 +1728,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	    };
 	    image.src = src;
 	};
-
-	/**
-	 * Decodes HTML entities in a string
-	 *
-	 * @param str Input string
-	 */
-	exports.decodeHtmlEntity = function(str) {
+exports.decodeHtmlEntity = function(str) {
 	    return str.replace(/&#(\d+);/g, function(match, dec) {
 	        return String.fromCharCode(dec);
 	    });
 	};
 
-
-	/**
-	 * Returns an element's dimensions if it's visible, `false` otherwise.
-	 *
-	 * @param el DOM element
-	 */
-	exports.dimensionCheck = function(el) {
+exports.dimensionCheck = function(el) {
 	    var dimensions = {
 	        height: el.clientHeight,
 	        width: el.clientWidth
@@ -2069,23 +1747,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	};
 
-
-	/**
-	 * Returns true if value is truthy or if it is "semantically truthy"
-	 * @param val
-	 */
-	exports.truthy = function(val) {
+exports.truthy = function(val) {
 	    if (typeof val === 'string') {
 	        return val === 'true' || val === 'yes' || val === '1' || val === 'on' || val === '✓';
 	    }
 	    return !!val;
 	};
 
-	/**
-	 * Parses input into a well-formed CSS color
-	 * @param val
-	 */
-	exports.parseColor = function(val) {
+exports.parseColor = function(val) {
 	    var hexre = /(^(?:#?)[0-9a-f]{6}$)|(^(?:#?)[0-9a-f]{3}$)/i;
 	    var rgbre = /^rgb\((\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*\)$/;
 	    var rgbare = /^rgba\((\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(0\.\d{1,}|1)\)$/;
@@ -2119,10 +1788,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return null;
 	};
 
-	/**
-	 * Provides the correct scaling ratio for canvas drawing operations on HiDPI screens (e.g. Retina displays)
-	 */
-	exports.canvasRatio = function () {
+exports.canvasRatio = function () {
 	    var devicePixelRatio = 1;
 	    var backingStoreRatio = 1;
 
@@ -2137,25 +1803,16 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    return devicePixelRatio / backingStoreRatio;
 	};
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
+}.call(exports, (function() { return this; }())))
 
-/***/ },
-/* 8 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(global) {var DOM = __webpack_require__(9);
+},
+function(module, exports, __webpack_require__) {
+(function(global) {var DOM = __webpack_require__(9);
 
 	var SVG_NS = 'http://www.w3.org/2000/svg';
 	var NODE_TYPE_COMMENT = 8;
 
-	/**
-	 * Generic SVG element creation function
-	 *
-	 * @param svg SVG context, set to null if new
-	 * @param width Document width
-	 * @param height Document height
-	 */
-	exports.initSVG = function(svg, width, height) {
+exports.initSVG = function(svg, width, height) {
 	    var defs, style, initialize = false;
 
 	    if (svg && svg.querySelector) {
@@ -2177,21 +1834,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	        defs.appendChild(style);
 	        svg.appendChild(defs);
 	    }
-
-	    //IE throws an exception if this is set and Chrome requires it to be set
-	    if (svg.webkitMatchesSelector) {
+if (svg.webkitMatchesSelector) {
 	        svg.setAttribute('xmlns', SVG_NS);
 	    }
 
-	    //Remove comment nodes
-	    for (var i = 0; i < svg.childNodes.length; i++) {
+ for (var i = 0; i < svg.childNodes.length; i++) {
 	        if (svg.childNodes[i].nodeType === NODE_TYPE_COMMENT) {
 	            svg.removeChild(svg.childNodes[i]);
 	        }
 	    }
-
-	    //Remove CSS
-	    while (style.childNodes.length) {
+ while (style.childNodes.length) {
 	        style.removeChild(style.childNodes[0]);
 	    }
 
@@ -2205,12 +1857,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return svg;
 	};
 
-	/**
-	 * Converts serialized SVG to a string suitable for data URI use
-	 * @param svgString Serialized SVG string
-	 * @param [base64] Use base64 encoding for data URI
-	 */
-	exports.svgStringToDataURI = function() {
+exports.svgStringToDataURI = function() {
 	    var rawPrefix = 'data:image/svg+xml;charset=UTF-8,';
 	    var base64Prefix = 'data:image/svg+xml;charset=UTF-8;base64,';
 
@@ -2223,22 +1870,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	    };
 	}();
 
-	/**
-	 * Returns serialized SVG with XML processing instructions
-	 *
-	 * @param svg SVG context
-	 * @param stylesheets CSS stylesheets to include
-	 */
-	exports.serializeSVG = function(svg, engineSettings) {
+exports.serializeSVG = function(svg, engineSettings) {
 	    if (!global.XMLSerializer) return;
 	    var serializer = new XMLSerializer();
 	    var svgCSS = '';
 	    var stylesheets = engineSettings.stylesheets;
 
-	    //External stylesheets: Processing Instruction method
 	    if (engineSettings.svgXMLStylesheet) {
 	        var xml = DOM.createXML();
-	        //Add <?xml-stylesheet ?> directives
 	        for (var i = stylesheets.length - 1; i >= 0; i--) {
 	            var csspi = xml.createProcessingInstruction('xml-stylesheet', 'href="' + stylesheets[i] + '" rel="stylesheet"');
 	            xml.insertBefore(csspi, xml.firstChild);
@@ -2253,19 +1892,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return svgCSS + svgText;
 	};
 
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
+}.call(exports, (function() { return this; }())))
 
-/***/ },
-/* 9 */
-/***/ function(module, exports) {
+},
+ function(module, exports) {
 
-	/* WEBPACK VAR INJECTION */(function(global) {/**
-	 * Generic new DOM element function
-	 *
-	 * @param tag Tag to create
-	 * @param namespace Optional namespace value
-	 */
-	exports.newEl = function(tag, namespace) {
+(function(global) {
+  exports.newEl = function(tag, namespace) {
 	    if (!global.document) return;
 
 	    if (namespace == null) {
@@ -2275,32 +1908,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	};
 
-	/**
-	 * Generic setAttribute function
-	 *
-	 * @param el Reference to DOM element
-	 * @param attrs Object with attribute keys and values
-	 */
-	exports.setAttr = function (el, attrs) {
+exports.setAttr = function (el, attrs) {
 	    for (var a in attrs) {
 	        el.setAttribute(a, attrs[a]);
 	    }
 	};
 
-	/**
-	 * Creates a XML document
-	 * @private
-	 */
-	exports.createXML = function() {
+exports.createXML = function() {
 	    if (!global.DOMParser) return;
 	    return new DOMParser().parseFromString('<xml />', 'application/xml');
 	};
 
-	/**
-	 * Converts a value into an array of DOM nodes
-	 *
-	 * @param val A string, a NodeList, a Node, or an HTMLCollection
-	 */
+
 	exports.getNodeArray = function(val) {
 	    var retval = null;
 	    if (typeof(val) == 'string') {
@@ -2321,17 +1940,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    return retval;
 	};
+}.call(exports, (function() { return this; }())))
 
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
-
-/***/ },
-/* 10 */
-/***/ function(module, exports) {
+},
+function(module, exports) {
 
 	var Color = function(color, options) {
-	    //todo: support rgba, hsla, and rrggbbaa notation
-	    //todo: use CIELAB internally
-	    //todo: add clamp function (with sign)
+
 	    if (typeof color !== 'string') return;
 
 	    this.original = color;
@@ -2357,7 +1972,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    this.set(parseInt(color, 16));
 	};
 
-	//todo: jsdocs
 	Color.rgb2hex = function(r, g, b) {
 	    function format (decimal) {
 	        var hex = (decimal | 0).toString(16);
@@ -2370,7 +1984,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return [r, g, b].map(format).join('');
 	};
 
-	//todo: jsdocs
 	Color.hsl2rgb = function (h, s, l) {
 	    var H = h / 60;
 	    var C = (1 - Math.abs(2 * l - 1)) * s;
@@ -2410,21 +2023,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return [r, g, b];
 	};
 
-	/**
-	 * Sets the color from a raw RGB888 integer
-	 * @param raw RGB888 representation of color
-	 */
-	//todo: refactor into a static method
-	//todo: factor out individual color spaces
-	//todo: add HSL, CIELAB, and CIELUV
-	Color.prototype.set = function (val) {
+Color.prototype.set = function (val) {
 	    this.raw = val;
 
 	    var r = (this.raw & 0xFF0000) >> 16;
 	    var g = (this.raw & 0x00FF00) >> 8;
 	    var b = (this.raw & 0x0000FF);
 
-	    // BT.709
 	    var y = 0.2126 * r + 0.7152 * g + 0.0722 * b;
 	    var u = -0.09991 * r - 0.33609 * g + 0.436 * b;
 	    var v = 0.615 * r - 0.55861 * g - 0.05639 * b;
@@ -2444,11 +2049,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return this;
 	};
 
-	/**
-	 * Lighten or darken a color
-	 * @param multiplier Amount to lighten or darken (-1 to 1)
-	 */
-	Color.prototype.lighten = function(multiplier) {
+Color.prototype.lighten = function(multiplier) {
 	    var cm = Math.min(1, Math.max(0, Math.abs(multiplier))) * (multiplier < 0 ? -1 : 1);
 	    var bm = (255 * cm) | 0;
 	    var cr = Math.min(255, Math.max(0, this.rgb.r + bm));
@@ -2458,19 +2059,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return new Color(hex);
 	};
 
-	/**
-	 * Output color in hex format
-	 * @param addHash Add a hash character to the beginning of the output
-	 */
-	Color.prototype.toHex = function(addHash) {
+Color.prototype.toHex = function(addHash) {
 	    return (addHash ? '#' : '') + this.raw.toString(16);
 	};
 
-	/**
-	 * Returns whether or not current color is lighter than another color
-	 * @param color Color to compare against
-	 */
-	Color.prototype.lighterThan = function(color) {
+Color.prototype.lighterThan = function(color) {
 	    if (!(color instanceof Color)) {
 	        color = new Color(color);
 	    }
@@ -2478,41 +2071,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return this.yuv.y > color.yuv.y;
 	};
 
-	/**
-	 * Returns the result of mixing current color with another color
-	 * @param color Color to mix with
-	 * @param multiplier How much to mix with the other color
-	 */
-	/*
-	Color.prototype.mix = function (color, multiplier) {
-	    if (!(color instanceof Color)) {
-	        color = new Color(color);
-	    }
-
-	    var r = this.rgb.r;
-	    var g = this.rgb.g;
-	    var b = this.rgb.b;
-	    var a = this.alpha;
-
-	    var m = typeof multiplier !== 'undefined' ? multiplier : 0.5;
-
-	    //todo: write a lerp function
-	    r = r + m * (color.rgb.r - r);
-	    g = g + m * (color.rgb.g - g);
-	    b = b + m * (color.rgb.b - b);
-	    a = a + m * (color.alpha - a);
-
-	    return new Color(Color.rgbToHex(r, g, b), {
-	        'alpha': a
-	    });
-	};
-	*/
-
-	/**
-	 * Returns the result of blending another color on top of current color with alpha
-	 * @param color Color to blend on top of current color, i.e. "Ca"
-	 */
-	//todo: see if .blendAlpha can be merged into .mix
 	Color.prototype.blendAlpha = function(color) {
 	    if (!(color instanceof Color)) {
 	        color = new Color(color);
@@ -2521,7 +2079,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var Ca = color;
 	    var Cb = this;
 
-	    //todo: write alpha blending function
 	    var r = Ca.alpha * Ca.rgb.r + (1 - Ca.alpha) * Cb.rgb.r;
 	    var g = Ca.alpha * Ca.rgb.g + (1 - Ca.alpha) * Cb.rgb.g;
 	    var b = Ca.alpha * Ca.rgb.b + (1 - Ca.alpha) * Cb.rgb.b;
@@ -2531,19 +2088,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	module.exports = Color;
 
-
-/***/ },
-/* 11 */
-/***/ function(module, exports) {
+},
+ function(module, exports) {
 
 	module.exports = {
 	  'version': '2.9.4',
 	  'svg_ns': 'http://www.w3.org/2000/svg'
 	};
-
-/***/ },
-/* 12 */
-/***/ function(module, exports, __webpack_require__) {
+ },
+function(module, exports, __webpack_require__) {
 
 	var shaven = __webpack_require__(13);
 
@@ -2563,7 +2116,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	};
 
-	//todo: deprecate tag arg, infer tag from shape object
 	function convertShape (shape, tag) {
 	  return templates.element({
 	    'tag': tag,
@@ -2612,7 +2164,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  var css = '#' + holderId + ' text { ' + textCss(textGroup.properties) + ' } ';
 
-	  // push text down to be equally vertically aligned with canvas renderer
 	  textGroup.y += textGroup.textPositionData.boundingBox.height * 0.8;
 
 	  var wordTags = [];
@@ -2672,7 +2223,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  var style = templates.element({
 	    'tag': 'style',
-	    //todo: figure out how to add CDATA directive
 	    'content': css,
 	    'type': 'text/css'
 	  });
@@ -2700,13 +2250,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return svgString;
 	};
 
-/***/ },
-/* 13 */
-/***/ function(module, exports, __webpack_require__) {
+},
+ function(module, exports, __webpack_require__) {
 
 	var escape = __webpack_require__(14)
 
-	// TODO: remove namespace
+
 
 	module.exports = function shaven (array, namespace, returnObject) {
 
@@ -2736,11 +2285,9 @@ return /******/ (function(modules) { // webpackBootstrap
 			var classNames = sugarString.match(/\.[\w-]+/g)
 
 
-			// Assign id if is set
 			if (id) {
 				element.attr.id = id[1]
 
-				// Add element to the return object
 				returnObject[id[1]] = element
 			}
 
@@ -2800,13 +2347,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 		for (; i < array.length; i++) {
 
-			// Don't render element if value is false or null
 			if (array[i] === false || array[i] === null) {
 				array[0] = false
 				break
 			}
 
-			// Continue with next array value if current value is undefined or true
 			else if (array[i] === undefined || array[i] === true) {
 				continue
 			}
@@ -2888,52 +2433,27 @@ return /******/ (function(modules) { // webpackBootstrap
 			array[0] = HTMLString
 		}
 
-		// Return root element on index 0
 		returnObject[0] = array[0]
 
 		if (callback)
 			callback(array[0])
 
-		// returns object containing all elements with an id and the root element
 		return returnObject
 	}
 
 
-/***/ },
-/* 14 */
-/***/ function(module, exports) {
+},
+ function(module, exports) {
 
-	/*!
-	 * escape-html
-	 * Copyright(c) 2012-2013 TJ Holowaychuk
-	 * Copyright(c) 2015 Andreas Lubbe
-	 * Copyright(c) 2015 Tiancheng "Timothy" Gu
-	 * MIT Licensed
-	 */
+
 
 	'use strict';
 
-	/**
-	 * Module variables.
-	 * @private
-	 */
+
 
 	var matchHtmlRegExp = /["'&<>]/;
 
-	/**
-	 * Module exports.
-	 * @public
-	 */
-
 	module.exports = escapeHtml;
-
-	/**
-	 * Escape special characters in the given string of html.
-	 *
-	 * @param  {string} string The string to escape for inserting into HTML
-	 * @return {string}
-	 * @public
-	 */
 
 	function escapeHtml(string) {
 	  var str = '' + string;
@@ -2983,9 +2503,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 
-/***/ },
-/* 15 */
-/***/ function(module, exports, __webpack_require__) {
+ },
+  function(module, exports, __webpack_require__) {
 
 	var DOM = __webpack_require__(9);
 	var utils = __webpack_require__(7);
@@ -3008,7 +2527,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var bg = root.children.holderBg;
 	        var bgWidth = dpr * bg.width;
 	        var bgHeight = dpr * bg.height;
-	        //todo: parametrize outline width (e.g. in scene object)
 	        var outlineWidth = 2;
 	        var outlineOffsetWidth = outlineWidth / 2;
 
@@ -3052,8 +2570,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    };
 	})();
 
-/***/ }
-/******/ ])
+}
+])
 });
 ;
 (function(ctx, isMeteorPackage) {
