@@ -11,5 +11,6 @@ layout: about
         	
 {{ content }}
 
+{% include preview.html %}
 </div>
 </div>
