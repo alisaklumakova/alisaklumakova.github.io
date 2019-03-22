@@ -9,7 +9,7 @@ layout: about
  <div class="container">
         <div class="cont-des">
         	
-        	{{ content }}
+{{ content }}
 
 </div>
 </div>
