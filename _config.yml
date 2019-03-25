@@ -10,7 +10,11 @@ url: "http://www.radyoturka.net/" # the base hostname & protocol for your site
 markdown: kramdown
 permalink: pretty
 
+paginate: 5
 
-plugins:
-    - jekyll-minifier
-    - jekyll-sitemap
+plugins: 
+  - jekyll-minifier
+  - jekyll-paginate
+  - jekyll-sitemap
+  - jekyll-feed
+  - jekyll-archives

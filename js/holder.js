@@ -1,3 +1,7 @@
+---
+layout: compress-js
+---
+
 (function (window) {
   if (!window.document) return;
   var document = window.document;
